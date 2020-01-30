@@ -10,9 +10,9 @@ namespace ConsoleAdventure.Project.Models
     public void Setup()
     {
       //Data Setup
-      Player js = new Player("Jon Snow", new String[] { "Sword", "Brooding Look", "Direwolf" });
-      Player ph = new Player("Pee Wee Herman", new String[] { "Yo-Yo", "Laugh", "Genie" });
-      Player tr = new Player("T-Rex", new String[] { "Teeth", "Tiny Arms", "Laser" });
+      Player js = new Player("Jon Snow", new string[] { "Sword", "Brooding Look", "Direwolf" });
+      Player ph = new Player("Pee Wee Herman", new string[] { "Yo-Yo", "Laugh", "Genie" });
+      Player tr = new Player("T-Rex", new string[] { "Teeth", "Tiny Arms", "Laser" });
 
       Item wood_sword = new Item("Sword of Wood", "It's a sword...that's made from wood.");
       Item shield = new Item("Shield of Oak", "Shield made from Magic Oak Tree");
