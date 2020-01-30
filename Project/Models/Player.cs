@@ -10,7 +10,7 @@ namespace ConsoleAdventure.Project.Models
     public Player(string name, IEnumerable<string> inventory)
     {
       Name = name;
-      inventory = new List<string>();
+      Inventory = new List<Item>();
     }
   }
 }

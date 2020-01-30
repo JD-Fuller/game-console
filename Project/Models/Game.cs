@@ -29,15 +29,27 @@ namespace ConsoleAdventure.Project.Models
       Item baseballbat = new Item("Louisville Slugger", "For crushing homers");
 
 
+      Room td = new Room("ThunderDome Foyer", "This is the first room. There is a door to the East.");
+      Room wr = new Room("Wizard Room", "This is the second room. There are two doors - one to the east, and one to the west.");
+      Room gr = new Room("Goblin Room", "This is the third room. There are two doors - one to the east, and one to the west.");
+      Room dr = new Room("Dragon Room Lair 3000", "This is the fourth room. There is one door in this room, and you just walked through it (Behind you to the west.");
 
-      Room td = new Room("ThunderDome Foyer", "This is the first room");
-      Room wr = new Room("Wizard Room", "This is the second room");
-      Room gr = new Room("Goblin Room", "This is the third room");
-      Room dr = new Room("Dragon Room Lair 3000", "This is the fourth room");
+      //Add Exits to each Room
+      td.AddExit(wr);
+      wr.AddExit(td);
+      wr.AddExit(gr);
+      gr.AddExit(wr);
+      gr.AddExit(dr);
+      dr.AddExit(gr);
 
-      //Establish Relationships
+      //Add Items to Rooms
+      td.Items.Add(new Item(magic_map.Name, magic_map.Description));
+      wr.Items.Add(new Item(baseballbat.Name, baseballbat.Description));
+      gr.Items.Add(new Item(wizard_pepper.Name, wizard_pepper.Description));
+      dr.Items.Add(new Item(lildeb.Name, lildeb.Description));
 
-
+      CurrentRoom = td;
+      CurrentPlayer = js;
     }
 
     public Game()
