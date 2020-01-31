@@ -13,11 +13,9 @@ namespace ConsoleAdventure.Project.Models
     public Room EastRoom { get; set; }
     public Room WestRoom { get; set; }
 
-    public void AddExit(Room des)
+    public void ChangeRoom()
     {
-      Exits.Add(des.Name, des
-      );
-      des.Exits.Add(Name, this);
+
     }
 
     public Room(string name, string description)

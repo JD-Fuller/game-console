@@ -34,13 +34,21 @@ namespace ConsoleAdventure.Project.Models
       Room gr = new Room("Goblin Room", "This is the third room. There are two doors - one to the east, and one to the west.");
       Room dr = new Room("Dragon Room Lair 3000", "This is the fourth room. There is one door in this room, and you just walked through it (Behind you to the west.");
 
+      //Add exits to each room
+      td.Exits.Add("east", wr);
+      wr.Exits.Add("west", td);
+      wr.Exits.Add("east", gr);
+      gr.Exits.Add("west", wr);
+      gr.Exits.Add("east", dr);
+      dr.Exits.Add("west", gr);
+
       //Add Exits to each Room
-      td.AddExit(wr);
-      wr.AddExit(td);
-      wr.AddExit(gr);
-      gr.AddExit(wr);
-      gr.AddExit(dr);
-      dr.AddExit(gr);
+      // td.AddExit(wr);
+      // wr.AddExit(td);
+      // wr.AddExit(gr);
+      // gr.AddExit(wr);
+      // gr.AddExit(dr);
+      // dr.AddExit(gr);
 
       //Add Items to Rooms
       td.Items.Add(new Item(magic_map.Name, magic_map.Description));

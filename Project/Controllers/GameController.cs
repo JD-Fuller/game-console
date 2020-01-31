@@ -15,6 +15,7 @@ namespace ConsoleAdventure.Project.Controllers
     public void Run()
     {
       //TODO Add Service.PrintMenu method here for start of the game
+
       while (_playing)
       {
         Print();
@@ -34,12 +35,41 @@ namespace ConsoleAdventure.Project.Controllers
       //NOTE this will take the user input and parse it into a command and option.
       //IE: take silver key => command = "take" option = "silver key"
 
+      Console.Clear();
+      switch (option)
+      {
+        case "east":
+          _gameService.Go(option);
+          System.Console.WriteLine("Cleared East");
+          break;
+        case "west":
+          _gameService.Go(option);
+          System.Console.WriteLine("Cleared West");
+          break;
+        case "quest":
+          Console.Clear();
+          _playing = false;
+          break;
+        case "item":
+          _gameService.TakeItem();
+          System.Console.WriteLine("Item acquired");
+          break;
+        default:
+          System.Console.WriteLine("Those words mean nothing here, try again.");
+          break;
+      }
+
+
+
     }
 
     //NOTE this should print your messages for the game.
     private void Print()
     {
-      _gameService.Messages.Clear();
+      foreach (var message in _gameService.Messages)
+      {
+        Console.WriteLine(message);
+      }
 
     }
 
