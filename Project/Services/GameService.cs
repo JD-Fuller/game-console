@@ -28,7 +28,6 @@ namespace ConsoleAdventure.Project
         Messages.Add("");
         Messages.Add($"{_game.CurrentRoom.Description}");
         return;
-
       }
     }
     public void Help()
@@ -51,7 +50,6 @@ namespace ConsoleAdventure.Project
       System.Console.WriteLine("");
       System.Console.WriteLine("Good luck!");
       return;
-
     }
 
     public void Inventory()
@@ -69,19 +67,14 @@ namespace ConsoleAdventure.Project
       }
       return;
     }
-
-
     public void Look()
     {
-      var fannyPack = _game.CurrentPlayer.Inventory;
-      string bossRoom = "Dragon Room Lair 3000";
-      bool b = fannyPack.Contains(bossRoom);
-
-      if (_game.CurrentRoom.Name == bossRoom)
-      {
-
-      }
-
+      // var fannyPack = _game.CurrentPlayer.Inventory;
+      // string bossRoom = "Dragon Room Lair 3000";
+      // bool b = fannyPack.Contains(bossRoom);
+      // if (_game.CurrentRoom.Name == bossRoom)
+      // {
+      // }
       var roomItem = _game.CurrentRoom.Items;
       System.Console.Clear();
       Messages.Clear();
@@ -91,7 +84,6 @@ namespace ConsoleAdventure.Project
         Messages.Add($"Items List: {item.Name}---->{item.Description}");
       }
     }
-
     public void Quit()
     {
       System.Console.Clear();
@@ -107,13 +99,18 @@ namespace ConsoleAdventure.Project
     {
       System.Console.Clear();
       Messages.Clear();
-      Messages.Add("You have chosen to reset this voyage.");
-      _game.Setup();
+      Messages.Add("Welcome to the Return of the Planet of the Apes at Hogwarts School of Witchcraft and Wizardry for the Fellowship of the Rings of the Immaculate heart of the Sisters of Sonic the Hedgehog, I am Link, I will be your guide.");
+
+      System.Console.WriteLine("What's your name old sport?");
+      Setup(System.Console.ReadLine());
     }
 
     public void Setup(string playerName)
     {
-      throw new System.NotImplementedException();
+      _game.CurrentPlayer.Name = playerName;
+      Messages.Add($"Hello Jedi Knight Wizard Slayer Renegade of Funk, {_game.CurrentPlayer.Name}");
+      Messages.Add($"You are in the {_game.CurrentRoom.Name}. Be weary and take caution in this place. Something smells fishy....could be the tuna salad someone had for lunch earlier.");
+      Messages.Add("Enter 'help' for a list of actions you can take while you are on your quest");
     }
     ///<summary>When taking an item be sure the item is in the current room before adding it to the player inventory, Also don't forget to remove the item from the room it was picked up in</summary>
     public void TakeItem(string itemName)
@@ -130,11 +127,13 @@ namespace ConsoleAdventure.Project
       // }
       // else
       // {
-
-      var item = roomItem.Find(i => i.Name == itemName);
-      fannyPack.Add(item);
-      roomItem.Clear();
-      System.Console.WriteLine($"You have done well for yourself. The {itemName} is now yours. Thievery is always a respectable occupation.");
+      var item = roomItem.Find(i => i.Name.ToLower() == itemName);
+      if (item != null)
+      {
+        fannyPack.Add(item);
+        roomItem.Clear();
+        System.Console.WriteLine($"You have done well for yourself. The {itemName} is now yours. Thievery is always a respectable occupation.");
+      }
       // }
     }
     ///<summary>
@@ -144,19 +143,46 @@ namespace ConsoleAdventure.Project
     ///</summary>
     public void UseItem(string itemName)
     {
-      // bool isInList = false;
+      var activeRoomName = _game.CurrentRoom.Name;
+      var fannyPack = _game.CurrentPlayer.Inventory;
+      var roomItem = _game.CurrentRoom.Items;
 
-      // for (int i = 0; i < _game.CurrentPlayer.Inventory.Count; i++)
-      // {
-      //   if (_game.CurrentPlayer.Inventory[i].Name == itemName)
-      //   {
-      //     _game.CurrentPlayer.Inventory.RemoveAt[i];
-      //     break;
-      //     //  _game.CurrentPlayer.Inventory[I].quantity += quantity;
-      //     isInList = true;
-      //     if (isInList == true)
-      //     {
-      //     Messages.Add("Item Used...sort of");
+
+      var item = fannyPack.Find(i => i.Name.ToLower() == itemName);
+
+      if (item != null)
+      {
+        if (activeRoomName.ToLower() != "dragon room lair 3000")
+        {
+          Messages.Add("You can't use that item in this room. Try hitting the batting cages and maybe you'll be able to see your pitches in the 9th inning better");
+        }
+
+
+        fannyPack.Remove(item);
+        roomItem.Add(item);
+        System.Console.WriteLine($"You have done well for yourself. The {itemName} is now yours. Thievery is always a respectable occupation.");
+      }
+
+
+      if (fannyPack.Exists(i => i.Name.ToLower() != itemName))
+      {
+        Messages.Add("This item is not in your inventory --- Choose another item.");
+      }
+      else
+      // if (fannyPack.Exists(i => i.Name == itemName))
+      {
+        if ((activeRoomName.ToLower() == "dragon room lair 3000") && (itemName.ToLower() == "louisville slugger"))
+        {
+          Messages.Add($"You have defeated the treacherous energy vampire dragon with the {itemName}, your name will be known throughout the land....Well, that's about it...heh...we don't have a reward or anything, so, shoo, shoo, get out of here!");
+          return;
+        }
+        else
+        {
+          Messages.Add($"You have upset the Demogorgon with your lack of Baseball skills - your quest is over and you are now vanquished from the realm. GAME OVER!");
+          Reset();
+          return;
+        }
+      }
     }
 
     private static void Timing(int time)

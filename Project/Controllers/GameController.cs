@@ -15,8 +15,9 @@ namespace ConsoleAdventure.Project.Controllers
     public void Run()
     {
       Console.Clear();
-      Console.WriteLine("Welcome to the North Jon Snow. Forget everything you know, and you might just make it out alive.");
+      Console.WriteLine("Welcome to the North. Forget everything you know, and you might just make it out alive.");
       Console.WriteLine("This will be the toughest, simple challenge you'll do all morning......probably, we can't really guarantee that.");
+      Console.WriteLine("Enter 'help' for a  menu, or 'play' if you are a baller and don't care about the rules...honey badger.");
 
       while (_playing)
       {
@@ -65,6 +66,13 @@ namespace ConsoleAdventure.Project.Controllers
         case "look":
           Console.Clear();
           _gameService.Look();
+          break;
+        case "play":
+          Console.Clear();
+          _gameService.Setup(option);
+          break;
+        case "reset":
+          Run();
           break;
         default:
           System.Console.WriteLine("Those words mean nothing here, try again.");
