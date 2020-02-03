@@ -36,23 +36,32 @@ namespace ConsoleAdventure.Project.Controllers
       //IE: take silver key => command = "take" option = "silver key"
 
       Console.Clear();
-      switch (option)
+      switch (command)
       {
-        case "east":
+        case "go":
           _gameService.Go(option);
-          System.Console.WriteLine("Cleared East");
           break;
-        case "west":
-          _gameService.Go(option);
-          System.Console.WriteLine("Cleared West");
+        case "help":
+          _gameService.Help();
           break;
-        case "quest":
+        case "use":
+          _gameService.UseItem(option);
+          break;
+        case "quit":
           Console.Clear();
           _playing = false;
           break;
-        case "item":
-          _gameService.TakeItem();
-          System.Console.WriteLine("Item acquired");
+        case "take":
+          Console.Clear();
+          _gameService.TakeItem(option);
+          break;
+        case "inventory":
+          Console.Clear();
+          _gameService.Inventory();
+          break;
+        case "look":
+          Console.Clear();
+          _gameService.Look();
           break;
         default:
           System.Console.WriteLine("Those words mean nothing here, try again.");

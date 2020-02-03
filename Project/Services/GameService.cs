@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using ConsoleAdventure.Project.Interfaces;
 using System.Threading;
 using ConsoleAdventure.Project.Models;
+using System.Linq;
 
 namespace ConsoleAdventure.Project
 {
@@ -20,42 +21,76 @@ namespace ConsoleAdventure.Project
       if (_game.CurrentRoom.Exits.ContainsKey(direction))
       {
         System.Console.Clear();
-        // System.Console.WriteLine("Stay Alert mortal");
         Messages.Clear();
         Timing(7);
         _game.CurrentRoom = _game.CurrentRoom.Exits[direction];
         Messages.Add($"You are now in the {_game.CurrentRoom.Name.ToString()} room.");
         Messages.Add("");
-        Messages.Add("Stay Alert and look around");
+        Messages.Add($"{_game.CurrentRoom.Description}");
         return;
 
       }
     }
     public void Help()
     {
-      throw new System.NotImplementedException();
+      System.Console.Clear();
+      Messages.Clear();
+      System.Console.WriteLine("---------------Quest Menu--------------");
+      System.Console.WriteLine("");
+      System.Console.WriteLine("Select 'go east' or 'go west' to travel between rooms");
+      System.Console.WriteLine("");
+      System.Console.WriteLine("Enter 'Look' to see items in a room");
+      System.Console.WriteLine("");
+      System.Console.WriteLine("Enter 'Take', followed by item to put item in your fannie pack.");
+      System.Console.WriteLine("");
+      System.Console.WriteLine("Enter 'Inventory' to see items in your fannie pack");
+      System.Console.WriteLine("");
+      System.Console.WriteLine("Enter 'Use', followed by item name to use item");
+      System.Console.WriteLine("");
+      System.Console.WriteLine("Enter 'Quit' to exit game");
+      System.Console.WriteLine("");
+      System.Console.WriteLine("Good luck!");
+      return;
+
     }
 
     public void Inventory()
     {
-      throw new System.NotImplementedException();
+      System.Console.WriteLine($"Total Count of Items in Fannie Pack: {_game.CurrentPlayer.Inventory.Count}");
+
+      if (_game.CurrentPlayer.Inventory != null)
+      {
+        System.Console.WriteLine("Items In Fannie Pack: " + _game.CurrentPlayer.Inventory);
+      }
     }
 
     public void Look()
     {
-      throw new System.NotImplementedException();
+      System.Console.Clear();
+      // System.Console.WriteLine("Stay Alert mortal");
+      Messages.Clear();
+      Messages.Add($"This room contains {_game.CurrentRoom.Items.Count} items.");
+      Messages.Add($"Items List: {_game.CurrentRoom.Items}");
+      return;
     }
 
     public void Quit()
     {
-      throw new System.NotImplementedException();
+      System.Console.Clear();
+      // System.Console.WriteLine("Stay Alert mortal");
+      Messages.Clear();
+      Messages.Add("Some people aren't cut out for quests. Fare thee well on the jourey home.");
+      return;
     }
     ///<summary>
     ///Restarts the game 
     ///</summary>
     public void Reset()
     {
-      throw new System.NotImplementedException();
+      System.Console.Clear();
+      Messages.Clear();
+      Messages.Add("You have chosen to reset this voyage.");
+      _game.Setup();
     }
 
     public void Setup(string playerName)
@@ -84,7 +119,22 @@ namespace ConsoleAdventure.Project
     ///</summary>
     public void UseItem(string itemName)
     {
-      throw new System.NotImplementedException();
+      // bool isInList = false;
+
+      // for (int i = 0; i < _game.CurrentPlayer.Inventory.Count; i++)
+      // {
+      //   if (_game.CurrentPlayer.Inventory[i].Name == itemName)
+      //   {
+      //     _game.CurrentPlayer.Inventory.RemoveAt[i];
+      //     break;
+      //     //  _game.CurrentPlayer.Inventory[I].quantity += quantity;
+      //     isInList = true;
+      //     if (isInList == true)
+      //     {
+      //     Messages.Add("Item Used...sort of");
+
+
+
     }
 
     private static void Timing(int time)
@@ -95,5 +145,7 @@ namespace ConsoleAdventure.Project
         Thread.Sleep(250);
       }
     }
+
   }
+
 }
