@@ -40,6 +40,8 @@ namespace ConsoleAdventure.Project.Models
       CurrentRoom = td;
       CurrentPlayer = js;
 
+
+
       //Add exits to each room
       td.Exits.Add("east", wr);
       wr.Exits.Add("west", td);
@@ -56,11 +58,15 @@ namespace ConsoleAdventure.Project.Models
       // gr.AddExit(dr);
       // dr.AddExit(gr);
 
+
+
+
       //Add Items to Rooms
       td.Items.Add(new Item(magic_map.Name, magic_map.Description));
-      wr.Items.Add(new Item(baseballbat.Name, baseballbat.Description));
+      wr.Items.Add(baseballbat);
       gr.Items.Add(new Item(wizard_pepper.Name, wizard_pepper.Description));
       dr.Items.Add(new Item(lildeb.Name, lildeb.Description));
+      dr.useables.Add(baseballbat, "You killed the demogorgon voldemort.");
 
       //Add Items to Player
       js.Inventory.Add(new Item(ipod.Name, ipod.Description));

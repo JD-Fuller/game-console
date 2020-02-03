@@ -13,6 +13,8 @@ namespace ConsoleAdventure.Project.Models
     public Room EastRoom { get; set; }
     public Room WestRoom { get; set; }
 
+    public Dictionary<Item, string> useables { get; set; }
+
     public void ChangeRoom()
     {
 
@@ -24,6 +26,7 @@ namespace ConsoleAdventure.Project.Models
       Description = description;
       Items = new List<Item>();
       Exits = new Dictionary<string, IRoom>();
+      useables = new Dictionary<Item, string>();
 
 
     }

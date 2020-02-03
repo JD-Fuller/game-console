@@ -15,9 +15,14 @@ namespace ConsoleAdventure.Project.Controllers
     public void Run()
     {
       Console.Clear();
-      Console.WriteLine("Welcome to the North. Forget everything you know, and you might just make it out alive.");
-      Console.WriteLine("This will be the toughest, simple challenge you'll do all morning......probably, we can't really guarantee that.");
-      Console.WriteLine("Enter 'help' for a  menu, or 'play' if you are a baller and don't care about the rules...honey badger.");
+      //This shows up on startup of the program
+      Console.WriteLine("Welcome to the North.");
+      Console.WriteLine("Forget everything you know, and you might just make it out alive.");
+      Console.WriteLine("");
+      Console.WriteLine("This will be the toughest and easiest challenge you will do all mid-morning....probably, we can't really guarantee that according to the lawyers.");
+      Console.WriteLine("");
+      System.Console.WriteLine("What's your name old sport?");
+      _gameService.Setup(System.Console.ReadLine());
 
       while (_playing)
       {
@@ -31,6 +36,10 @@ namespace ConsoleAdventure.Project.Controllers
     //NOTE Gets the user input, calls the appropriate command, and passes on the option if needed.
     public void GetUserInput()
     {
+      Console.WriteLine("");
+      // Console.WriteLine("Enter 'Restart' at anytime to restart your game");
+      // Console.WriteLine("");
+      // Console.WriteLine("Enter 'Help' to see a menu of options");
       Console.WriteLine("");
       Console.WriteLine("What would you like to do?");
       string input = Console.ReadLine().ToLower() + " ";
@@ -52,6 +61,7 @@ namespace ConsoleAdventure.Project.Controllers
           _gameService.UseItem(option);
           break;
         case "quit":
+        case "q":
           Console.Clear();
           _playing = false;
           break;
@@ -67,14 +77,16 @@ namespace ConsoleAdventure.Project.Controllers
           Console.Clear();
           _gameService.Look();
           break;
-        case "play":
+        case "restart":
+        case "r":
           Console.Clear();
-          _gameService.Setup(option);
-          break;
-        case "reset":
           Run();
           break;
+        // case "play":
+        //   Setup();
+        //   break;
         default:
+          System.Console.Clear();
           System.Console.WriteLine("Those words mean nothing here, try again.");
           break;
       }
