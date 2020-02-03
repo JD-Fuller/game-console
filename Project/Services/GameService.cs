@@ -56,12 +56,23 @@ namespace ConsoleAdventure.Project
 
     public void Inventory()
     {
-      System.Console.WriteLine($"Total Count of Items in Fannie Pack: {_game.CurrentPlayer.Inventory.Count}");
 
-      if (_game.CurrentPlayer.Inventory != null)
+      foreach (var item in _game.CurrentPlayer.Inventory)
       {
-        System.Console.WriteLine("Items In Fannie Pack: " + _game.CurrentPlayer.Inventory);
+        System.Console.WriteLine($"Print this out {item}");
       }
+
+      // var list = _game.CurrentPlayer.Inventory;
+
+
+      // System.Console.WriteLine($"Total Count of Items in Fannie Pack: {_game.CurrentPlayer.Inventory.Count}");
+
+      // if (_game.CurrentPlayer.Inventory != null)
+      // {
+      //   System.Console.WriteLine("Items In Fannie Pack: " + _game.CurrentPlayer.Inventory);
+      //   list.ForEach(System.Console.WriteLine);
+      //   System.Console.WriteLine(list);
+      // }
     }
 
     public void Look()
