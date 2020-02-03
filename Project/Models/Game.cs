@@ -10,14 +10,17 @@ namespace ConsoleAdventure.Project.Models
     public void Setup()
     {
       //Data Setup
-      Player js = new Player("Jon Snow", new string[] { "Sword", "Brooding Look", "Direwolf" });
-      Player ph = new Player("Pee Wee Herman", new string[] { "Yo-Yo", "Laugh", "Genie" });
-      Player tr = new Player("T-Rex", new string[] { "Teeth", "Tiny Arms", "Laser" });
+      Player js = new Player("Jon Snow", new string[] { });
+      Player ph = new Player("Pee Wee Herman", new string[] { });
+      Player tr = new Player("T-Rex", new string[] { });
+
+
 
       Item wood_sword = new Item("Sword of Wood", "It's a sword...that's made from wood.");
       Item shield = new Item("Shield of Oak", "Shield made from Magic Oak Tree");
       Item magic_map = new Item("Maurauder's Map", "A map that some guy named Potter left here");
       Item ipod = new Item("Magic Mystery Ipod", "This device takes you on a journey");
+      Item yo_yo = new Item("Yo-Yo", "Golden Gun of the game");
       Item wizard_pepper = new Item("Wizard Pepper", "You don't even want to know what this does...just don't take it if you plan on going somewhere and need to not look like you've just ingested 100 grams of LSD");
       Item carbon_baton = new Item("Carbon Fiber Baton", "It's for twirling");
       Item mjolnir = new Item("Vial of Thor", "Vial of juice from the stray dog outside the castle - has a yellow-ish hue and pungent smell");
@@ -33,6 +36,9 @@ namespace ConsoleAdventure.Project.Models
       Room wr = new Room("Wizard Room", "This is the second room. There are two doors - one to the east, and one to the west.");
       Room gr = new Room("Goblin Room", "This is the third room. There are two doors - one to the east, and one to the west.");
       Room dr = new Room("Dragon Room Lair 3000", "This is the fourth room. There is one door in this room, and you just walked through it (Behind you to the west.");
+
+      CurrentRoom = td;
+      CurrentPlayer = js;
 
       //Add exits to each room
       td.Exits.Add("east", wr);
@@ -56,8 +62,10 @@ namespace ConsoleAdventure.Project.Models
       gr.Items.Add(new Item(wizard_pepper.Name, wizard_pepper.Description));
       dr.Items.Add(new Item(lildeb.Name, lildeb.Description));
 
-      CurrentRoom = td;
-      CurrentPlayer = js;
+      //Add Items to Player
+      js.Inventory.Add(new Item(ipod.Name, ipod.Description));
+
+
     }
 
     public Game()

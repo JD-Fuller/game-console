@@ -12,5 +12,6 @@ namespace ConsoleAdventure.Project.Models
       Name = name;
       Inventory = new List<Item>();
     }
+
   }
 }

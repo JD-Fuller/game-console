@@ -56,33 +56,40 @@ namespace ConsoleAdventure.Project
 
     public void Inventory()
     {
+      System.Console.Clear();
+      Messages.Clear();
+      // var fannyPack = _game.CurrentPlayer.Inventory;
+      System.Console.WriteLine($"Total Count of Items in Fannie Pack: {_game.CurrentPlayer.Inventory.Count}");
+      Messages.Add("*****---------------------------*****");
+      Messages.Add("*****------Fannie Pack Gear List:");
 
       foreach (var item in _game.CurrentPlayer.Inventory)
       {
-        System.Console.WriteLine($"Print this out {item}");
+        Messages.Add($"{item.Name}---->{item.Description}");
       }
-
-      // var list = _game.CurrentPlayer.Inventory;
-
-
-      // System.Console.WriteLine($"Total Count of Items in Fannie Pack: {_game.CurrentPlayer.Inventory.Count}");
-
-      // if (_game.CurrentPlayer.Inventory != null)
-      // {
-      //   System.Console.WriteLine("Items In Fannie Pack: " + _game.CurrentPlayer.Inventory);
-      //   list.ForEach(System.Console.WriteLine);
-      //   System.Console.WriteLine(list);
-      // }
+      return;
     }
+
 
     public void Look()
     {
+      var fannyPack = _game.CurrentPlayer.Inventory;
+      string bossRoom = "Dragon Room Lair 3000";
+      bool b = fannyPack.Contains(bossRoom);
+
+      if (_game.CurrentRoom.Name == bossRoom)
+      {
+
+      }
+
+      var roomItem = _game.CurrentRoom.Items;
       System.Console.Clear();
-      // System.Console.WriteLine("Stay Alert mortal");
       Messages.Clear();
-      Messages.Add($"This room contains {_game.CurrentRoom.Items.Count} items.");
-      Messages.Add($"Items List: {_game.CurrentRoom.Items}");
-      return;
+      Messages.Add($"This room contains {roomItem.Count} item(s).");
+      foreach (var item in roomItem)
+      {
+        Messages.Add($"Items List: {item.Name}---->{item.Description}");
+      }
     }
 
     public void Quit()
@@ -111,17 +118,24 @@ namespace ConsoleAdventure.Project
     ///<summary>When taking an item be sure the item is in the current room before adding it to the player inventory, Also don't forget to remove the item from the room it was picked up in</summary>
     public void TakeItem(string itemName)
     {
-      if (_game.CurrentRoom.Items.Count == 0)
-      {
-        Messages.Add("Silly rabbit, trix are for kids - there are no items in this room");
-        return;
-      }
-      Messages.Add($"Adding the following item, {_game.CurrentRoom.Items}, to your magic fannie pack.");
-      _game.CurrentPlayer.Inventory.AddRange(_game.CurrentRoom.Items);
-      _game.CurrentRoom.Items.Clear();
-      Messages.Add($"The player now has {_game.CurrentPlayer.Inventory} in his possession.");
-      Messages.Add($"The room now has {_game.CurrentRoom.Items.Count} items.");
+      Messages.Clear();
+      System.Console.Clear();
 
+      var fannyPack = _game.CurrentPlayer.Inventory;
+      var roomItem = _game.CurrentRoom.Items;
+
+      // if (roomItem.Count == 0)
+      // {
+      //   Messages.Add("Trix are for kids, there's no item in this room.");
+      // }
+      // else
+      // {
+
+      var item = roomItem.Find(i => i.Name == itemName);
+      fannyPack.Add(item);
+      roomItem.Clear();
+      System.Console.WriteLine($"You have done well for yourself. The {itemName} is now yours. Thievery is always a respectable occupation.");
+      // }
     }
     ///<summary>
     ///No need to Pass a room since Items can only be used in the CurrentRoom
@@ -143,9 +157,6 @@ namespace ConsoleAdventure.Project
       //     if (isInList == true)
       //     {
       //     Messages.Add("Item Used...sort of");
-
-
-
     }
 
     private static void Timing(int time)
@@ -156,7 +167,7 @@ namespace ConsoleAdventure.Project
         Thread.Sleep(250);
       }
     }
-
   }
-
 }
+
+
